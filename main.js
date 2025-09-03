@@ -94,4 +94,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update cart count on initial page load.
     updateCartCount();
+
+    // --- Cart Page Display ---
+    // This part of the script will only run on the cart page.
+    // We'll check if the URL contains 'cart.html'.
+    if (window.location.pathname.includes('cart.html')) {
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartSubtotalElement = document.getElementById('cart-subtotal');
+        const cartTotalElement = document.getElementById('cart-total');
+        const checkoutTotalElement = document.getElementById('checkout-total');
+
+        function displayCartItems() {
+            // Don't run if the container isn't on the page
+            if (!cartItemsContainer) {
+                console.error('Cart items container not found on this page.');
+                return;
+            }
+
+            let subtotal = 0;
+            let cartHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-center text-gray-500 py-8">Your cart is empty.</p>';
+                if (cartSubtotalElement) cartSubtotalElement.textContent = 'Ksh 0.00';
+                if (cartTotalElement) cartTotalElement.textContent = 'Ksh 0.00';
+                if (checkoutTotalElement) checkoutTotalElement.textContent = 'Ksh 0.00';
+                return;
+            }
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                // Build the HTML for each item
+                cartHTML += `
+                    <div class="flex items-center justify-between p-4 border-b" data-product-id="${item.id}">
+                        <div class="flex items-center space-x-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded">
+                            <div>
+                                <h3 class="font-semibold">${item.name}</h3>
+                                <p class="text-gray-600">Ksh ${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-gray-600">Qty: ${item.quantity}</p>
+                            <p class="font-semibold mt-2">Ksh ${itemTotal.toFixed(2)}</p>
+                        </div>
+                    </div>`;
+            });
+
+            // Set the container's HTML once to improve performance
+            cartItemsContainer.innerHTML = cartHTML;
+
+            // Assuming total is the same as subtotal for now.
+            const total = subtotal;
+
+            // Update all total displays on the page
+            if (cartSubtotalElement) cartSubtotalElement.textContent = `Ksh ${subtotal.toFixed(2)}`;
+            if (cartTotalElement) cartTotalElement.textContent = `Ksh ${total.toFixed(2)}`;
+            if (checkoutTotalElement) checkoutTotalElement.textContent = `Ksh ${total.toFixed(2)}`;
+        }
+
+        displayCartItems();
+    }
 });
