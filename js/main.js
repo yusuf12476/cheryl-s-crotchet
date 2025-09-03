@@ -12,15 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Active Navigation Link ---
     const navLinks = document.querySelectorAll('.nav-link');
-    // Get the file name from the URL, e.g., "store.html"
-    const currentPage = window.location.pathname.split('/').pop();
+    // Get the full pathname from the URL, e.g., "/store.html" or "/crotchet-website/store.html"
+    const currentPath = window.location.pathname;
 
     navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
-        // Add 'active' class if the link's href matches the current page.
-        // Also handles the homepage case where the path might be empty.
-        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+        const linkPath = new URL(link.href).pathname; // Gets the full path from the link's href
+
+        // Check if the link's path is the same as the current page's path.
+        // For the homepage, check if the path ends with '/index.html' or is just the root '/'.
+        if (currentPath === linkPath || (currentPath === '/' && linkPath.endsWith('/index.html'))) {
             link.classList.add('active');
+            // For accessibility, it's good to mark the current page.
+            link.setAttribute('aria-current', 'page');
         }
     });
 
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Cart Page Display ---
     // This part of the script will only run on the cart page.
-    // We'll check if the URL contains 'cart.html'.
+    // We'll check if the URL path ends with 'cart.html'.
     if (window.location.pathname.includes('cart.html')) {
         const cartItemsContainer = document.getElementById('cart-items-container');
         const cartSubtotalElement = document.getElementById('cart-subtotal');
@@ -115,7 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
             let cartHTML = '';
 
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="text-center text-gray-500 py-8">Your cart is empty.</p>';
+                // The "empty cart" message is already in cart.html, so we just need to show it.
+                const emptyCartMessage = document.getElementById('empty-cart-message');
+                const cartSummary = document.getElementById('cart-summary');
+                if (emptyCartMessage) emptyCartMessage.classList.remove('hidden');
+                if (cartSummary) cartSummary.classList.add('hidden');
+                
+                // Clear any lingering items
+                cartItemsContainer.innerHTML = '';
+
                 if (cartSubtotalElement) cartSubtotalElement.textContent = 'Ksh 0.00';
                 if (cartTotalElement) cartTotalElement.textContent = 'Ksh 0.00';
                 if (checkoutTotalElement) checkoutTotalElement.textContent = 'Ksh 0.00';
