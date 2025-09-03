@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorials | CHERYL'S CROTCHET</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-orange-50 text-gray-800;
+        }
+        .nav-link.active {
+            @apply text-orange-600 border-b-2 border-orange-600 font-semibold;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-orange-50 shadow-lg py-8 fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 md:px-6 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-4">
+                <img src="images/Gemini_Generated_Image_vomy3bvomy3bvomy.png" alt="Cheryl's Crotchet Logo" class="h-28 w-28 rounded-lg">
+                <span class="text-6xl font-bold text-orange-700 italic" style="font-family: 'Dancing Script', cursive;">CHERYL'S CROTCHET</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="home-page">Home</a>
+                <a href="about.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="about-page">About</a>
+                <a href="tutorials.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="tutorials-page">Tutorials</a>
+                <a href="blog.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="blog-page">Blog</a>
+                <a href="projects.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="projects-page">Projects</a>
+                <a href="store.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="store-page">Store</a>
+                <a href="cart.html" class="relative text-gray-700 hover:text-orange-600 transition-colors" data-page="cart-page">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="fixed top-44 left-0 w-full bg-white shadow-lg transition-transform duration-300 transform -translate-y-full md:hidden z-40">
+        <nav class="flex flex-col space-y-4 px-8 py-6" style="font-family: 'Dancing Script', cursive;">
+            <a href="index.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="home-page">Home</a>
+            <a href="about.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="about-page">About</a>
+            <a href="tutorials.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="tutorials-page">Tutorials</a>
+            <a href="blog.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="blog-page">Blog</a>
+            <a href="projects.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="projects-page">Projects</a>
+            <a href="store.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="store-page">Store</a>
+            <a href="cart.html" class="relative flex items-center text-2xl text-gray-700 hover:text-orange-600 transition-colors" data-page="cart-page">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                </svg>
+                <span>Cart</span>
+                <span id="mobile-cart-count" class="absolute -top-2 left-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow pt-44">
+        <!-- Message Box -->
+        <div id="message-box" class="fixed top-48 right-4 md:right-8 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 z-[100]">
+            Item added to cart!
+        </div>
+
+        <!-- Video Tutorials Page -->
+        <section id="tutorials-page" class="p-4 md:p-8">
+            <div class="container mx-auto py-12">
+                <h2 class="text-4xl font-bold text-center text-orange-800 mb-8">Video Tutorials</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tutorial 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="aspect-w-16 aspect-h-9 mb-4 overflow-hidden rounded-lg">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/a-W22v-Q7eU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-black mb-2">Beginner's Guide to Single Crochet</h3>
+                        <p class="text-black">Learn the fundamental stitch that forms the basis of countless projects. Perfect for first-time crocheters!</p>
+                    </div>
+                    <!-- Tutorial 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="aspect-w-16 aspect-h-9 mb-4 overflow-hidden rounded-lg">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/U3l0_Q7dC2c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-black mb-2">How to Read a Crochet Pattern</h3>
+                        <p class="text-black">Demystify the language of patterns with our step-by-step guide. You'll be reading patterns like a pro in no time!</p>
+                    </div>
+                    <!-- Tutorial 3 -->
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="aspect-w-16 aspect-h-9 mb-4 overflow-hidden rounded-lg">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/5F2o3rD57iE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-black mb-2">Crocheting a Magic Ring</h3>
+                        <p class="text-black">The perfect start for any amigurumi or round project. Master this technique for seamless joins.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-auto">
+        <div class="container mx-auto px-4 md:px-6 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Brand Info -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <img src="images/Gemini_Generated_Image_vomy3bvomy3bvomy.png" alt="Cheryl's Crotchet Logo" class="h-12 w-12 rounded-lg">
+                        <span class="text-2xl font-bold text-white" style="font-family: 'Dancing Script', cursive;">CHERYL'S CROTCHET</span>
+                    </a>
+                    <p class="text-sm text-gray-400">Handmade with love. Your one-stop shop for crochet patterns, tools, and inspiration.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4 tracking-wider">Quick Links</h4>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="index.html" class="text-gray-400 hover:text-orange-400 transition-colors">Home</a>
+                        <a href="about.html" class="text-gray-400 hover:text-orange-400 transition-colors">About</a>
+                        <a href="store.html" class="text-gray-400 hover:text-orange-400 transition-colors">Store</a>
+                        <a href="tutorials.html" class="text-gray-400 hover:text-orange-400 transition-colors">Tutorials</a>
+                        <a href="projects.html" class="text-gray-400 hover:text-orange-400 transition-colors">Projects</a>
+                        <a href="blog.html" class="text-gray-400 hover:text-orange-400 transition-colors">Blog</a>
+                    </nav>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4 tracking-wider">Support</h4>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Contact Us</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">FAQ</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Shipping & Returns</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Privacy Policy</a>
+                    </nav>
+                </div>
+
+                <!-- Follow Us -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4 tracking-wider">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white" title="Facebook"><span class="sr-only">Facebook</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white" title="Instagram"><span class="sr-only">Instagram</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427.465C9.53 2.013 9.884 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.25-9.75a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white" title="Pinterest"><span class="sr-only">Pinterest</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.582-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.96.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" /></svg></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
+                <p class="text-sm text-gray-400">&copy; 2024 CHERYL'S CROTCHET. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

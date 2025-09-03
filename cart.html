@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | CHERYL'S CROTCHET</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-orange-50 text-gray-800;
+        }
+        .nav-link.active {
+            @apply text-orange-600 border-b-2 border-orange-600 font-semibold;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-orange-50 shadow-lg py-8 fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 md:px-6 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-4">
+                <img src="images/Gemini_Generated_Image_vomy3bvomy3bvomy.png" alt="Cheryl's Crotchet Logo" class="h-28 w-28 rounded-lg">
+                <span class="text-6xl font-bold text-orange-700 italic" style="font-family: 'Dancing Script', cursive;">CHERYL'S CROTCHET</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="home-page">Home</a>
+                <a href="about.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="about-page">About</a>
+                <a href="tutorials.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="tutorials-page">Tutorials</a>
+                <a href="blog.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="blog-page">Blog</a>
+                <a href="projects.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="projects-page">Projects</a>
+                <a href="store.html" class="nav-link text-gray-700 hover:text-orange-600 transition-colors" data-page="store-page">Store</a>
+                <a href="cart.html" class="relative text-gray-700 hover:text-orange-600 transition-colors" data-page="cart-page">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="fixed top-44 left-0 w-full bg-white shadow-lg transition-transform duration-300 transform -translate-y-full md:hidden z-40">
+        <nav class="flex flex-col space-y-4 px-8 py-6" style="font-family: 'Dancing Script', cursive;">
+            <a href="index.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="home-page">Home</a>
+            <a href="about.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="about-page">About</a>
+            <a href="tutorials.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="tutorials-page">Tutorials</a>
+            <a href="blog.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="blog-page">Blog</a>
+            <a href="projects.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="projects-page">Projects</a>
+            <a href="store.html" class="nav-link text-2xl text-gray-700 hover:text-orange-600" data-page="store-page">Store</a>
+            <a href="cart.html" class="relative flex items-center text-2xl text-gray-700 hover:text-orange-600 transition-colors" data-page="cart-page">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                </svg>
+                <span>Cart</span>
+                <span id="mobile-cart-count" class="absolute -top-2 left-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow pt-44">
+        <!-- Message Box -->
+        <div id="message-box" class="fixed top-48 right-4 md:right-8 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 z-[100]">
+            Item added to cart!
+        </div>
+
+        <!-- Shopping Cart Page -->
+        <section id="cart-page" class="p-4 md:p-8">
+            <div class="container mx-auto py-12">
+                <div class="flex justify-center items-center gap-4 mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-orange-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    </svg>
+                    <h2 class="text-4xl font-bold text-orange-800">Your Shopping Cart</h2>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+                    <div id="cart-items-container">
+                        <!-- 
+                            Cart items will be generated here by JavaScript.
+                            If the cart is empty, the JS will display a message like this:
+                        -->
+                        <!--
+                        <div class="text-center py-12">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                            </svg>
+                            <h3 class="mt-2 text-xl font-semibold text-gray-900">Your cart is empty</h3>
+                            <p class="mt-1 text-sm text-gray-500">Looks like you haven't added anything to your cart yet.</p>
+                            <div class="mt-6">
+                                <a href="store.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                    Start Shopping
+                                </a>
+                            </div>
+                        </div>
+                        -->
+                        <!-- 
+                            And here is a sample structure for a single cart item.
+                            The JS will generate one of these for each item in the cart.
+                        -->
+                        <!--
+                        <div class="cart-item flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 py-4 px-2">
+                            <div class="flex items-center gap-4 w-full md:w-auto">
+                                <img src="https://via.placeholder.com/80" alt="Product Image" class="h-20 w-20 rounded-md object-cover">
+                                <div class="flex-grow">
+                                    <h4 class="font-semibold text-gray-800">Sample Crochet Item</h4>
+                                    <p class="text-sm text-gray-500">Price: Ksh 1,500.00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between md:justify-end gap-4 sm:gap-6 w-full md:w-auto">
+                                <div class="flex items-center gap-2">
+                                    <button class="quantity-decrease h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors" data-id="sample1" aria-label="Decrease quantity"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></button>
+                                    <span class="quantity-value font-semibold text-lg w-8 text-center">1</span>
+                                    <button class="quantity-increase h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors" data-id="sample1" aria-label="Increase quantity"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg></button>
+                                </div>
+                                <p class="font-semibold w-28 text-right">Ksh 1,500.00</p>
+                                <button class="remove-from-cart text-red-500 hover:text-red-700 transition-colors" data-id="sample1" aria-label="Remove item"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                    <div id="cart-summary" class="mt-8 border-t border-gray-200 pt-6 flex flex-col items-end">
+                        <div class="text-lg font-semibold text-black">
+                            Subtotal: <span id="cart-subtotal">Ksh 0.00</span>
+                        </div>
+                        <div class="text-xl font-bold text-orange-600 mt-2">
+                            Total: <span id="cart-total">Ksh 0.00</span>
+                        </div>
+                        <button onclick="checkout()" class="mt-6 bg-orange-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-700 transition-colors">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+
+                    <!-- Payment Section (Initially Hidden) -->
+                    <div id="payment-section" class="hidden mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Checkout Details</h3>
+                        <form id="checkout-form" novalidate>
+                            <!-- Shipping & Payment Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                                <!-- Shipping Information -->
+                                <div class="space-y-6">
+                                    <h4 class="text-lg font-semibold text-gray-700">Shipping Information</h4>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                            <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" required>
+                                        </div>
+                                        <div>
+                                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                                            <input type="text" id="address" name="address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" required>
+                                        </div>
+                                        <div>
+                                            <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                                            <input type="text" id="city" name="city" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" required>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="zip" class="block text-sm font-medium text-gray-700">ZIP / Postal Code</label>
+                                                <input type="text" id="zip" name="zip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" required>
+                                            </div>
+                                            <div>
+                                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                                <input type="text" id="country" name="country" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Method -->
+                                <div class="space-y-6">
+                                    <h4 class="text-lg font-semibold text-gray-700">Payment Method</h4>
+                                    <div class="space-y-4">
+                                        <!-- M-Pesa Option -->
+                                        <div class="flex items-center p-3 rounded-md border border-gray-300 has-[:checked]:border-orange-500 has-[:checked]:ring-1 has-[:checked]:ring-orange-500">
+                                            <input id="mpesa" name="payment-method" type="radio" value="mpesa" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300" checked>
+                                            <label for="mpesa" class="ml-3 block text-sm font-medium text-gray-700">M-Pesa</label>
+                                        </div>
+                                        <div id="mpesa-details" class="space-y-4 pl-5">
+                                            <div>
+                                                <label for="mpesa-phone" class="block text-sm font-medium text-gray-700">M-Pesa Phone Number</label>
+                                                <input type="tel" id="mpesa-phone" name="mpesa-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" placeholder="e.g., 0712345678" required>
+                                            </div>
+                                            <p class="text-xs text-gray-500">You will receive a STK push to complete the payment.</p>
+                                        </div>
+
+                                        <!-- Airtel Money Option -->
+                                        <div class="flex items-center p-3 rounded-md border border-gray-300 has-[:checked]:border-orange-500 has-[:checked]:ring-1 has-[:checked]:ring-orange-500">
+                                            <input id="airtel-money" name="payment-method" type="radio" value="airtel" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300">
+                                            <label for="airtel-money" class="ml-3 block text-sm font-medium text-gray-700">Airtel Money</label>
+                                        </div>
+                                        <div id="airtel-details" class="hidden space-y-4 pl-5">
+                                            <div>
+                                                <label for="airtel-phone" class="block text-sm font-medium text-gray-700">Airtel Money Phone Number</label>
+                                                <input type="tel" id="airtel-phone" name="airtel-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 sm:text-sm" placeholder="e.g., 0733123456">
+                                            </div>
+                                            <p class="text-xs text-gray-500">Follow the instructions on your phone to complete the payment.</p>
+                                        </div>
+
+                                        <!-- PayPal Option -->
+                                        <div class="flex items-center p-3 rounded-md border border-gray-300 has-[:checked]:border-orange-500 has-[:checked]:ring-1 has-[:checked]:ring-orange-500">
+                                            <input id="paypal" name="payment-method" type="radio" value="paypal" class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300">
+                                            <label for="paypal" class="ml-3 block text-sm font-medium text-gray-700">PayPal</label>
+                                        </div>
+                                        <div id="paypal-details" class="hidden space-y-4 pl-5">
+                                            <p class="text-xs text-gray-500">You will be redirected to PayPal to complete your purchase securely.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Summary & Actions -->
+                            <div class="mt-10 border-t border-gray-200 pt-6 flex flex-col items-end">
+                                 <div class="text-xl font-bold text-orange-600">
+                                    Total: <span id="checkout-total">Ksh 0.00</span>
+                                </div>
+                                <div class="flex items-center gap-4 mt-6">
+                                    <button type="button" onclick="backToCart()" class="bg-gray-200 text-gray-700 px-8 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors">
+                                        Back to Cart
+                                    </button>
+                                    <button type="submit" class="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-orange-700 transition-colors">
+                                        Complete Purchase
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-auto">
+        <div class="container mx-auto px-4 md:px-6 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Brand Info -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <img src="images/Gemini_Generated_Image_vomy3bvomy3bvomy.png" alt="Cheryl's Crotchet Logo" class="h-12 w-12 rounded-lg">
+                        <span class="text-2xl font-bold text-white" style="font-family: 'Dancing Script', cursive;">CHERYL'S CROTCHET</span>
+                    </a>
+                    <p class="text-sm text-gray-400">Handmade with love. Your one-stop shop for crochet patterns, tools, and inspiration.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4 tracking-wider">Quick Links</h4>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="index.html" class="text-gray-400 hover:text-orange-400 transition-colors">Home</a>
+                        <a href="about.html" class="text-gray-400 hover:text-orange-400 transition-colors">About</a>
+                        <a href="store.html" class="text-gray-400 hover:text-orange-400 transition-colors">Store</a>
+                        <a href="tutorials.html" class="text-gray-400 hover:text-orange-400 transition-colors">Tutorials</a>
+                        <a href="projects.html" class="text-gray-400 hover:text-orange-400 transition-colors">Projects</a>
+                        <a href="blog.html" class="text-gray-400 hover:text-orange-400 transition-colors">Blog</a>
+                    </nav>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4 tracking-wider">Support</h4>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Contact Us</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">FAQ</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Shipping & Returns</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Privacy Policy</a>
+                    </nav>
+                </div>
+
+                <!-- Follow Us -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4 tracking-wider">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white" title="Facebook"><span class="sr-only">Facebook</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white" title="Instagram"><span class="sr-only">Instagram</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427.465C9.53 2.013 9.884 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.25-9.75a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white" title="Pinterest"><span class="sr-only">Pinterest</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.582-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.96.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" /></svg></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
+                <p class="text-sm text-gray-400">&copy; 2024 CHERYL'S CROTCHET. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // This logic can be moved to your main.js file for better organization.
+
+        // --- START: Cart Rendering and Interaction Logic ---
+        // It's highly recommended to move this entire block to your main.js file
+        // to centralize cart management and use it across your site (e.g., on the store page).
+
+        // Function to format currency
+        const formatCurrency = (amount) => `Ksh ${amount.toFixed(2)}`;
+
+        // Function to render the entire cart view
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartSubtotalSpan = document.getElementById('cart-subtotal');
+            const cartTotalSpan = document.getElementById('cart-total');
+            const checkoutTotalSpan = document.getElementById('checkout-total');
+            const cartCountSpan = document.getElementById('cart-count');
+            const mobileCartCountSpan = document.getElementById('mobile-cart-count');
+
+            if (!cartItemsContainer) return;
+
+            cartItemsContainer.innerHTML = ''; // Clear current items
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.823-6.841a.75.75 0 00-.722-.935H3.188c-.51 0-.962.343-1.087.835L.383 12M18 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-9 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                        </svg>
+                        <h3 class="mt-2 text-xl font-semibold text-gray-900">Your cart is empty</h3>
+                        <p class="mt-1 text-sm text-gray-500">Looks like you haven't added anything to your cart yet.</p>
+                        <div class="mt-6">
+                            <a href="store.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                Start Shopping
+                            </a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-200 py-4 px-2';
+                    // Assumes your cart item object has: id, name, price, quantity, image
+                    itemElement.innerHTML = `
+                        <div class="flex items-center gap-4 w-full md:w-auto">
+                            <img src="${item.image}" alt="${item.name}" class="h-20 w-20 rounded-md object-cover">
+                            <div class="flex-grow">
+                                <h4 class="font-semibold text-gray-800">${item.name}</h4>
+                                <p class="text-sm text-gray-500">Price: ${formatCurrency(item.price)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between md:justify-end gap-4 sm:gap-6 w-full md:w-auto">
+                            <div class="flex items-center gap-2">
+                                <button class="quantity-decrease h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors" data-id="${item.id}" aria-label="Decrease quantity"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></button>
+                                <span class="quantity-value font-semibold text-lg w-8 text-center">${item.quantity}</span>
+                                <button class="quantity-increase h-8 w-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300 transition-colors" data-id="${item.id}" aria-label="Increase quantity"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg></button>
+                            </div>
+                            <p class="font-semibold w-28 text-right">${formatCurrency(item.price * item.quantity)}</p>
+                            <button class="remove-from-cart text-red-500 hover:text-red-700 transition-colors" data-id="${item.id}" aria-label="Remove item"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+
+            // Update totals and cart counts
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const total = subtotal; // Assuming no taxes or shipping for now
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            if (cartSubtotalSpan) cartSubtotalSpan.textContent = formatCurrency(subtotal);
+            if (cartTotalSpan) cartTotalSpan.textContent = formatCurrency(total);
+            if (checkoutTotalSpan) checkoutTotalSpan.textContent = formatCurrency(total);
+            if (cartCountSpan) cartCountSpan.textContent = totalItems;
+            if (mobileCartCountSpan) mobileCartCountSpan.textContent = totalItems;
+        }
+
+        // Function to update cart in localStorage and re-render the UI
+        function updateCartAndRender(newCart) {
+            localStorage.setItem('cart', JSON.stringify(newCart));
+            renderCart();
+        }
+
+        function setupCartInteractions() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            if (!cartItemsContainer) return;
+
+            cartItemsContainer.addEventListener('click', (e) => {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const target = e.target;
+                
+                const increaseBtn = target.closest('.quantity-increase');
+                const decreaseBtn = target.closest('.quantity-decrease');
+                const removeBtn = target.closest('.remove-from-cart');
+
+                if (increaseBtn) {
+                    const productId = increaseBtn.dataset.id;
+                    const itemIndex = cart.findIndex(item => item.id === productId);
+                    if (itemIndex > -1) {
+                        cart[itemIndex].quantity++;
+                        updateCartAndRender(cart);
+                    }
+                } else if (decreaseBtn) {
+                    const productId = decreaseBtn.dataset.id;
+                    const itemIndex = cart.findIndex(item => item.id === productId);
+                    if (itemIndex > -1) {
+                        cart[itemIndex].quantity--;
+                        if (cart[itemIndex].quantity <= 0) {
+                            // Remove item if quantity is 0 or less
+                            cart.splice(itemIndex, 1);
+                        }
+                        updateCartAndRender(cart);
+                    }
+                } else if (removeBtn) {
+                    const productId = removeBtn.dataset.id;
+                    // Filter out the item to be removed
+                    const newCart = cart.filter(item => item.id !== productId);
+                    updateCartAndRender(newCart);
+                }
+            });
+        }
+        // --- END: Cart Rendering and Interaction Logic ---
+
+        function checkout() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartSummary = document.getElementById('cart-summary');
+            const paymentSection = document.getElementById('payment-section');
+            const cartTotalSpan = document.getElementById('cart-total');
+            const checkoutTotalSpan = document.getElementById('checkout-total');
+
+            // Update total in checkout section from the cart total
+            if (cartTotalSpan && checkoutTotalSpan) {
+                checkoutTotalSpan.textContent = cartTotalSpan.textContent;
+            }
+
+            // Hide cart view and show payment view
+            if(cartItemsContainer) cartItemsContainer.classList.add('hidden');
+            if(cartSummary) cartSummary.classList.add('hidden');
+            if(paymentSection) paymentSection.classList.remove('hidden');
+        }
+
+        function backToCart() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartSummary = document.getElementById('cart-summary');
+            const paymentSection = document.getElementById('payment-section');
+
+            // Hide payment view and show cart view
+            if(paymentSection) paymentSection.classList.add('hidden');
+            if(cartItemsContainer) cartItemsContainer.classList.remove('hidden');
+            if(cartSummary) cartSummary.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render of the cart from localStorage
+            renderCart();
+            // Set up event listeners for +/i buttons and remove buttons
+            setupCartInteractions();
+
+            const checkoutForm = document.getElementById('checkout-form');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // In a real application, you would handle form validation and submission here.
+                    alert('Thank you for your purchase! (This is a demo and no payment has been processed)');
+                    // Optionally, clear the cart and redirect to a thank you page.
+                    // localStorage.removeItem('cart');
+                    // window.location.href = 'thank-you.html';
+                });
+            }
+
+            // Logic to show/hide payment details based on payment method selection
+            const mpesaDetails = document.getElementById('mpesa-details');
+            const airtelDetails = document.getElementById('airtel-details');
+            const paypalDetails = document.getElementById('paypal-details');
+            const mpesaPhoneInput = document.getElementById('mpesa-phone');
+            const airtelPhoneInput = document.getElementById('airtel-phone');
+            const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
+
+            paymentMethodRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const selectedMethod = e.target.value;
+                    
+                    // Toggle visibility for all detail sections
+                    mpesaDetails.classList.toggle('hidden', selectedMethod !== 'mpesa');
+                    airtelDetails.classList.toggle('hidden', selectedMethod !== 'airtel');
+                    paypalDetails.classList.toggle('hidden', selectedMethod !== 'paypal');
+
+                    // Update required attribute for inputs
+                    mpesaPhoneInput.required = (selectedMethod === 'mpesa');
+                    airtelPhoneInput.required = (selectedMethod === 'airtel');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & FAQ - Crotchet Creations</title>
+    <!-- Assuming Tailwind CSS is used. If you have a local setup, link your CSS file instead. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to your custom stylesheet if you have one -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        /* Add 'active' class styles for navigation if not already in a stylesheet */
+        .nav-link.active {
+            color: #9333ea; /* purple-600 */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- 
+        Header (Placeholder) 
+        - Please adapt this to your site's actual header structure.
+        - I've added the 'Contact & FAQ' link to the navigation.
+    -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">Crotchet Creations</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="nav-link hover:text-purple-600 transition-colors">Home</a>
+                <a href="store.html" class="nav-link hover:text-purple-600 transition-colors">Store</a>
+                <a href="contact-faq.html" class="nav-link hover:text-purple-600 transition-colors">Contact & FAQ</a>
+            </div>
+
+            <div class="flex items-center">
+                 <a href="cart.html" class="relative text-gray-700 hover:text-purple-600 mr-4">
+                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t -translate-y-full absolute top-full left-0 w-full transition-transform duration-300 ease-in-out">
+            <a href="index.html" class="nav-link block py-3 px-6 text-base hover:bg-gray-100">Home</a>
+            <a href="store.html" class="nav-link block py-3 px-6 text-base hover:bg-gray-100">Store</a>
+            <a href="contact-faq.html" class="nav-link block py-3 px-6 text-base hover:bg-gray-100">Contact & FAQ</a>
+            <a href="cart.html" class="flex justify-between items-center py-3 px-6 text-base hover:bg-gray-100">
+                <span>Cart</span>
+                <span id="mobile-cart-count" class="bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-12">Contact & Questions</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+            
+            <!-- Contact Form Section -->
+            <div class="lg:col-span-2">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+                <form action="#" method="POST" class="space-y-6 bg-white p-8 rounded-xl shadow-lg">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 transition">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 transition">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 transition"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="lg:col-span-3">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 focus:outline-none" aria-expanded="false">
+                            <span class="font-semibold text-lg">Do you take custom orders?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 text-gray-600">
+                                <p>Yes, we love creating custom pieces! Please use the contact form on this page to send us your ideas, including the type of item, desired colors, and any specific patterns you have in mind. We'll get back to you to discuss the details and provide a quote.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 focus:outline-none" aria-expanded="false">
+                            <span class="font-semibold text-lg">What are your shipping times?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 text-gray-600">
+                                <p>Since all items are handmade, please allow 5-7 business days for your order to be crafted. Once shipped, domestic orders typically arrive within 3-5 business days. You will receive a tracking number via email once your order has been dispatched.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 focus:outline-none" aria-expanded="false">
+                            <span class="font-semibold text-lg">How should I care for my crochet items?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="px-6 pb-6 text-gray-600">
+                                <p>To ensure your crochet items last a long time, we recommend hand washing them in cold water with a gentle detergent. Lay flat to dry and avoid wringing or twisting the item. Do not bleach or iron.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 
+        Footer (Placeholder)
+        - Please adapt this to your site's actual footer.
+    -->
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            &copy; 2024 Crotchet Creations. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- This script includes the cart and FAQ functionality -->
+    <script src="main.js"></script>
+
+</body>
+</html>
+
+```
+
+### Updates for `main.js`
+
+To power the interactive FAQ accordion, I'll add a new block of code to your `main.js` file. This script finds all FAQ questions and adds a click listener to toggle the visibility of the answer with a smooth animation.
+
+```diff
+--- a/c:\Users\maina\OneDrive\Documents\Desktop\ArrowBackup\Desktop\crotchet website\main.js
++++ b/c:\Users\maina\OneDrive\Documents\Desktop\ArrowBackup\Desktop\crotchet website\main.js
+@@ -148,4 +148,28 @@
+ 
+         displayCartItems();
+     }
++
++    // --- FAQ Accordion ---
++    // This will run on any page that has elements with the 'faq-question' class.
++    document.querySelectorAll('.faq-question').forEach(button => {
++        button.addEventListener('click', () => {
++            const answer = button.nextElementSibling;
++            const icon = button.querySelector('.faq-icon');
++            const isExpanded = button.getAttribute('aria-expanded') === 'true';
++
++            // Toggle ARIA attribute for accessibility
++            button.setAttribute('aria-expanded', !isExpanded);
++
++            if (isExpanded) {
++                // Collapse the answer by reverting to the CSS-defined max-height
++                answer.style.maxHeight = null;
++                icon.classList.remove('rotate-180');
++            } else {
++                // Expand the answer to its full content height
++                answer.style.maxHeight = answer.scrollHeight + 'px';
++                icon.classList.add('rotate-180');
++            }
++        });
++    });
+ });
+```
+
+With these changes, you'll have a fully functional and professional-looking Contact and FAQ page. Just remember to update the placeholder header and footer in `contact-faq.html` with your site's actual navigation and footer code.
+
+Let me know if you have any other questions!
+
+<!--
+[PROMPT_SUGGESTION]How can I make the contact form actually send me an email?[/PROMPT_SUGGESTION]
+[PROMPT_SUGGESTION]Can you add quantity update and remove buttons to the cart page?[/PROMPT_SUGGESTION]
+-->
